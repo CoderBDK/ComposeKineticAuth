@@ -57,12 +57,13 @@ import com.coderbdk.composekineticauth.ui.components.KineticLoginButton
 import com.coderbdk.composekineticauth.ui.components.KineticTextField
 import com.coderbdk.composekineticauth.ui.components.kineticGlowingBorder
 import com.coderbdk.composekineticauth.ui.model.AuthUiEvent
+import com.coderbdk.composekineticauth.ui.model.LoginState
 import com.coderbdk.composekineticauth.ui.theme.ComposeKineticAuthTheme
 import com.coderbdk.composekineticauth.uitl.ValidationUtils
 
 @Composable
 fun Login(
-    uiState: Login,
+    uiState: LoginState,
     onEvent: (AuthUiEvent.LoginEvent) -> Unit, onCreateAccount: () -> Unit
 ) {
     val infiniteTransition = rememberInfiniteTransition(label = "GlowAnimation")
@@ -249,7 +250,7 @@ fun Login(
 private fun LoginPreview() {
     ComposeKineticAuthTheme(darkTheme = true) {
         Surface {
-            Login(uiState = Login("", ""), onEvent = {}, onCreateAccount = {})
+            Login(uiState = LoginState("", ""), onEvent = {}, onCreateAccount = {})
         }
     }
 

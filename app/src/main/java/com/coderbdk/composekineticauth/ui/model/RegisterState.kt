@@ -1,12 +1,10 @@
-package com.coderbdk.composekineticauth.data.model
+package com.coderbdk.composekineticauth.ui.model
 
-import kotlinx.serialization.Serializable
-
-@Serializable
-data class Register(
+data class RegisterState(
     val firstName: String,
     val lastName: String,
     val email: String,
     val password: String,
+    val confirmPassword: String,
     val verificationCode: String,
 )

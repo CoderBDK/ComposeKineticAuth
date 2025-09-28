@@ -42,10 +42,8 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.coderbdk.composekineticauth.R
 import com.coderbdk.composekineticauth.data.model.Register
-import com.coderbdk.composekineticauth.ui.auth.AuthViewModel
 import com.coderbdk.composekineticauth.ui.components.CircularCheckbox
 import com.coderbdk.composekineticauth.ui.components.KineticLoginButton
 import com.coderbdk.composekineticauth.ui.components.KineticPasswordStrengthIndicator
@@ -53,13 +51,14 @@ import com.coderbdk.composekineticauth.ui.components.KineticStepProgressIndicato
 import com.coderbdk.composekineticauth.ui.components.KineticTextField
 import com.coderbdk.composekineticauth.ui.components.kineticGlowingBorder
 import com.coderbdk.composekineticauth.ui.model.AuthUiEvent
+import com.coderbdk.composekineticauth.ui.model.RegisterState
 import com.coderbdk.composekineticauth.ui.theme.ComposeKineticAuthTheme
 import com.coderbdk.composekineticauth.uitl.ValidationUtils
 
 
 @Composable
 fun RegisterStep2(
-    uiState: Register,
+    uiState: RegisterState,
     onEvent: (AuthUiEvent.RegisterEvent) -> Unit,
     onNext: () -> Unit, onBack: () -> Unit
 ) {
@@ -231,7 +230,7 @@ private fun RegisterStep2Preview() {
     ComposeKineticAuthTheme(darkTheme = false) {
         Surface {
             RegisterStep2(
-                uiState = Register("", "", "", "", "", ""),
+                uiState = RegisterState("", "", "", "", "", ""),
                 onEvent = {}, onNext = {}, onBack = {})
         }
     }

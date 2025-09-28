@@ -5,6 +5,8 @@ import com.coderbdk.composekineticauth.data.model.Login
 import com.coderbdk.composekineticauth.data.model.Register
 import com.coderbdk.composekineticauth.ui.model.AuthUiEvent
 import com.coderbdk.composekineticauth.ui.model.AuthUiState
+import com.coderbdk.composekineticauth.ui.model.LoginState
+import com.coderbdk.composekineticauth.ui.model.RegisterState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -13,8 +15,8 @@ class AuthViewModel : ViewModel() {
 
     private val _uiState = MutableStateFlow(
         AuthUiState(
-            login = Login("", ""),
-            register = Register(
+            login = LoginState("", ""),
+            register = RegisterState(
                 firstName = "",
                 lastName = "",
                 email = "",
@@ -35,7 +37,10 @@ class AuthViewModel : ViewModel() {
             is AuthUiEvent.RegisterEvent.OnLastNameChanged -> updateRegisterLastName(event.name)
             is AuthUiEvent.RegisterEvent.OnEmailChanged -> updateRegisterEmail(event.email)
             is AuthUiEvent.RegisterEvent.OnPasswordChanged -> updateRegisterPassword(event.password)
-            is AuthUiEvent.RegisterEvent.OnConfirmPasswordChanged -> updateRegisterConfirmPassword(event.password)
+            is AuthUiEvent.RegisterEvent.OnConfirmPasswordChanged -> updateRegisterConfirmPassword(
+                event.password
+            )
+
             is AuthUiEvent.RegisterEvent.OnVerificationCodeChanged -> updateVerificationCode(event.code)
             AuthUiEvent.RegisterEvent.OnSendCode -> sendVerificationCode()
             AuthUiEvent.RegisterEvent.OnRegisterRequest -> performRegister()
@@ -51,7 +56,11 @@ class AuthViewModel : ViewModel() {
     }
 
     private fun performLogin() {
-
+        val currentState = _uiState.value.login
+        val loginModel = Login(
+            email = currentState.email,
+            password = currentState.password
+        )
     }
 
     private fun updateRegisterFirstName(name: String) {
@@ -77,11 +86,19 @@ class AuthViewModel : ViewModel() {
     private fun updateVerificationCode(code: String) {
         _uiState.update { it.copy(register = it.register.copy(verificationCode = code)) }
     }
+
     private fun sendVerificationCode() {
 
     }
 
     private fun performRegister() {
-
+        val currentState = _uiState.value.register
+        val registerModel = Register(
+            firstName = currentState.firstName,
+            lastName = currentState.lastName,
+            email = currentState.email,
+            password = currentState.password,
+            verificationCode = currentState.verificationCode
+        )
     }
 }
