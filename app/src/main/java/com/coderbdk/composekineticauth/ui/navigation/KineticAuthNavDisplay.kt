@@ -41,7 +41,7 @@ fun KineticAuthNavDisplay(modifier: Modifier = Modifier) {
         backStack = backStack,
         entryProvider = entryProvider {
             entry<LoginNav> {
-                Login(uiState.login, viewModel::onEvent, onCreateAccount = {
+                Login(uiState.login, viewModel::onEvent, onNavigateToRegister = {
                     backStack.add(RegisterStep1Nav)
                 })
             }
@@ -91,5 +91,6 @@ fun KineticAuthNavDisplay(modifier: Modifier = Modifier) {
             slideInHorizontally(initialOffsetX = { -it }) togetherWith
                     slideOutHorizontally(targetOffsetX = { it })
         },
+        modifier = modifier
     )
 }

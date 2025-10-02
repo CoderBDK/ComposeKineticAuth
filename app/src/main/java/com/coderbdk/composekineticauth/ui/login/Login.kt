@@ -64,7 +64,8 @@ import com.coderbdk.composekineticauth.uitl.ValidationUtils
 @Composable
 fun Login(
     uiState: LoginState,
-    onEvent: (AuthUiEvent.LoginEvent) -> Unit, onCreateAccount: () -> Unit
+    onEvent: (AuthUiEvent.LoginEvent) -> Unit,
+    onNavigateToRegister: () -> Unit
 ) {
     val infiniteTransition = rememberInfiniteTransition(label = "GlowAnimation")
 
@@ -236,7 +237,7 @@ fun Login(
                     Text("Forgot Password?")
                 }
                 TextButton(
-                    onClick = onCreateAccount
+                    onClick = onNavigateToRegister
                 ) {
                     Text("Create Account")
                 }
@@ -250,7 +251,7 @@ fun Login(
 private fun LoginPreview() {
     ComposeKineticAuthTheme(darkTheme = true) {
         Surface {
-            Login(uiState = LoginState("", ""), onEvent = {}, onCreateAccount = {})
+            Login(uiState = LoginState("", ""), onEvent = {}, onNavigateToRegister = {})
         }
     }
 
